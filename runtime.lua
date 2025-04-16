@@ -2007,14 +2007,8 @@ CMDS.commands = {
 	["unspin"] = "()",
 	["hatspin"] = "Spins your characters hats around your head.",
 	["unhatspin"] = "()",
-	["facefuck"] = "Sits your character in front of their face to create the illusion of facefucking.",
-	["unfacefuck"] = "()",
-	["facefuckanim"] = "Places your character in front of their face with an animation to create the illusion of facefucking.",
-	["unfacefuckanim"] = "()",
 	["piggyback"] = "Sits your character behind their head to create the illusion of a piggy back.",
 	["unpiggyback"] = "()",
-	["fuck"] = "Rapes player you stated using an animation.",
-	["unfuck"] = "()",
 	["follow"] = "Follows player you stated at a safe distance.",
 	["unfollow"] = "()",
 	["oldroblox"] = "Makes your game look like old roblox.",
@@ -2594,10 +2588,7 @@ CMDS.usage = {
 	["animation"] = "(num1) (num2)",
 	["animpack"] = "(animation)",
 	["spin"] = "(num)",
-	["facefuck"] = "(plr)",
-	["facefuckanim"] = "(plr)",
 	["piggyback"] = "(plr)",
-	["fuck"] = "(plr)",
 	["follow"] = "(plr)",
 	["math"] = "(num) (+ / - / / / *) (num)",
 	["switchteam"] = "(str)",
@@ -2886,14 +2877,8 @@ CMDS.aliases = {
 	["stun"] = "ragdoll",
 	["unstun"] = "unragdoll",
 	["beybladeletitrip"] = "spin",
-	["facerape"] = "facefuck",
-	["unfacerape"] = "unfacefuck",
-	["facerapeanim"] = "facefuckanim",
-	["unfacerapeanim"] = "unfacefuckanim",
 	["ride"] = "piggyback",
 	["unride"] = "unpiggyback",
-	["rape"] = "fuck",
-	["unrape"] = "unfuck",
 	["stalk"] = "follow",
 	["unstalk"] = "unfollow",
 	["oldrblx"] = "oldroblox",
@@ -4437,7 +4422,7 @@ local cmdAdvertise = false
 function useCommand.advertise()
 	cmdAdvertise = true
 	while cmdAdvertise do
-		local str = "Get CMD X today! Best admin GUI, supports paid executors! type in cmd-x on google!"
+		local str = "Get the new chicken combo from KFC"
 		sayremote:FireServer(str, "All")
 		wait(math.random(1, 6)) 
 		local randomPlayer = cmdp:GetPlayers()[math.random(2,#cmdp:GetPlayers())]
@@ -4458,12 +4443,12 @@ function useCommand.advertise()
 		local randomPlayer = cmdp:GetPlayers()[math.random(2,#cmdp:GetPlayers())]
 		cmdlp.Character.Humanoid:MoveTo(randomPlayer.Character.HumanoidRootPart.Position)
 	end
-	opx("-","Now advertising CMD-X (Thank you!)")
+	opx("-","Now advertising KFC")
 end
 
 function useCommand.unadvertise()
 	cmdAdvertise = false
-	opx("-","Stopped advertising CMD-X (Thank you!)")
+	opx("-","Stopped advertising KFC")
 end
 
 function useCommand.version()
@@ -6847,79 +6832,7 @@ function useCommand.unhatspin()
 	end
 end
 
-local ff = false
-function useCommand.facefuck()
-	if arguments[2] then
-		target = findplr(arguments[2])
-		if target then
-			if target.Character and target.Character:FindFirstChild('Humanoid') then
-				if ff == true then
-					ff = false
-					opx("-","Stopped facefucking/faceraping")
-					cmdlp.Character.Humanoid.Sit = false			
-				return
-				else ff = true
-					opx("-","Facefucking/faceraping enabled")
-					while ff do
-						cmdlp.Character.Humanoid.Sit = true
-						cmdlp.Character.HumanoidRootPart.CFrame = target.Character.HumanoidRootPart.CFrame * CFrame.Angles(0,math.rad(180),0)* CFrame.new(0,1.6,0.4)
-						cmdlp.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new()
-						wait()
-					end
-				end
-			end
-		else
-			opx("*","Player does not exist!")
-		end
-	else
-		opx("*","2 arguments are needed for this command!")
-	end
-end
 
-function useCommand.unfacefuck()
-	opx("-","Stopped facefucking/faceraping")
-	cmdlp.Character.Humanoid.Sit = false
-	ff = false
-end
-
-local ff2 = false
-function useCommand.facefuckanim()
-	if arguments[2] then
-		target = findplr(arguments[2])
-		if target then
-			facebangAnim = Instance.new("Animation")
-			facebangAnim.AnimationId = "rbxassetid://148840371"
-			facebang = cmdlp.Character.Humanoid:LoadAnimation(facebangAnim)
-			facebang:Play(.1, 1, 1)
-			facebang:AdjustSpeed(3)
-			if target.Character and target.Character:FindFirstChild('Humanoid') then
-				if ff2 == true then
-					ff2 = false
-					opx("-","Stopped facefucking/faceraping")				
-				return
-				else ff2 = true
-					opx("-","Facefucking/faceraping enabled")
-					while ff2 do
-						cmdlp.Character.HumanoidRootPart.CFrame = target.Character.HumanoidRootPart.CFrame * CFrame.Angles(0,math.rad(180),0)* CFrame.new(0.4,1.6,0.4)
-						cmdlp.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new()
-						wait()
-					end
-				end
-			end
-		else
-			opx("*","Player does not exist!")
-		end
-	else
-		opx("*","2 arguments are needed for this command!")
-	end
-end
-
-function useCommand.unfacefuckanim()
-	ff2 = false
-	facebang:Stop()
-	facebang:Destroy()
-	opx("-","Stopped facefucking/faceraping")
-end
 
 local pb = false
 function useCommand.piggyback()
@@ -6957,46 +6870,7 @@ function useCommand.unpiggyback()
 	cmdlp.Character.Humanoid.Sit = false
 end
 
-local Bang = false
-function useCommand.fuck()
-	if arguments[2] then
-		target = findplr(arguments[2])
-		if target then
-			flwnum = -1
-			bangAnim = Instance.new("Animation")
-			bangAnim.AnimationId = "rbxassetid://148840371"
-			bang = cmdlp.Character.Humanoid:LoadAnimation(bangAnim)
-			bang:Play(.1, 1, 1)
-			bang:AdjustSpeed(3)
-			if target.Character and target.Character:FindFirstChild('Humanoid') then
-				if Bang == true then
-					Follow = false
-					Bang = false
-					opx("-","Fuck/rape disabled")
-				return
-				else Bang = true
-					opx("-","Fuck/rape enabled")
-					while Bang do
-						cmdlp.Character.HumanoidRootPart.CFrame = target.Character.HumanoidRootPart.CFrame + target.Character.HumanoidRootPart.CFrame.lookVector * flwnum
-						cmdlp.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new()
-						wait()
-					end
-				end
-			end
-		else
-			opx("*","Player does not exist!")
-		end
-	else
-		opx("*","2 arguments are needed for this command!")
-	end
-end
 
-function useCommand.unfuck()
-	bang:Stop()
-	bangAnim:Destroy()
-	Bang = false
-	opx("-","Rape/fuck disabled")
-end
 
 local Follow = false
 function useCommand.follow()
@@ -7977,7 +7851,7 @@ end
 
 function useCommand.sit()
 	cmdlp.Character.Humanoid.Sit = true
-	opx("-","You just sat your ass down")
+	opx("-","Sat down")
 end
 
 function useCommand.sitwalk()
@@ -12524,9 +12398,9 @@ end
 
 function useCommand.credits()
 	opx("-","Opened credits")
-	opxL("Credits","Note: Some discords may be out of date due to consistent changing;\
-	Owner - "..DevCords[1].." & pigeon\
-	Dev - "..DevCords[2].."\
+	opxL("Credits","Note: Some info may be out of date due to consistent changing;\
+	Owners - finiwork & pigeon\
+	Fixed by ThreeDayMystery\
 	Thank you to IY for some functions inside CMD-X\
 	Thank you to Bannable for animpack\
 	Thank you to 6033 for old-aimbot")
